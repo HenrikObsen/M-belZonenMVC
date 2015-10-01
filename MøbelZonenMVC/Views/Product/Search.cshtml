@@ -1,0 +1,28 @@
+﻿@using RepoMZ
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Søgeresultat</h2>
+@{
+    List<Produkt> p = Model;
+    if (p.Count > 0)
+    {
+        foreach (Produkt pro in Model)
+        {
+            <table class="proTable">
+                <tr>
+                    <td class="proTableLtd"><h2>@pro.Navn</h2>pro.Tekst<br />Pris:@pro.Pris kr.</td>
+                    <td class="proTableRtd"><img src="/Images/200/@pro.Billede" /></td>
+                </tr>
+            </table>
+        }
+    }
+    else
+    {
+        <b>Der blev ikke fundet noget på din søgning!!!</b>
+    }
+
+}

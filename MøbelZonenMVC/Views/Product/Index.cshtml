@@ -1,0 +1,26 @@
+﻿@using RepoMZ
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    int pId = ViewBag.ID;
+    var kf = new KategoriFac();
+}
+
+<h1>@kf.Get(pId).Navn</h1>
+
+
+@foreach (Produkt pro in Model)
+{
+    <table class="proTable">
+        <tr>
+            <td class="proTableLtd"><h2>@pro.Navn</h2>pro.Tekst<br />Pris:@pro.Pris kr.</td>
+            <td class="proTableRtd"><img src="/Images/200/@pro.Billede" /></td>
+        </tr>
+    </table>2
+}
+
+                

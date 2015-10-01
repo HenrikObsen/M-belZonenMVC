@@ -1,0 +1,88 @@
+﻿@using System.Activities.Expressions
+@using System.Activities.Statements
+@using RepoMZ
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/Styles/Main.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div id="bannerBox">
+    </div>
+    <div id="contentWrapper">
+        <div id="vMenu">
+            <div id="vMenuCon">
+                <h1>Kattegorier</h1>
+
+                @{ var katF = new KategoriFac();}
+
+                @foreach (Kategori k in katF.GetAll())
+                {
+                    //@Html.ActionLink(k.Navn, k.ID.ToString(), "Produkt", new { @class = "menuLinks" })
+                    //@Html.Raw("<br/>")
+                    <a href="/Product/Index/@k.ID/">@k.Navn</a><br />
+
+                }
+
+                b
+            </div>
+
+            <table id="linkTable">
+                <tr>
+                    <td class="linkImgTd"><img src="/Content/GFX/home.jpg" /></td>
+                    <td class="linkLinkTd"><a href="Default.aspx" class="Menu">Home</a></td>
+                </tr>
+                <tr>
+                    <td class="linkImgTd"><img src="/Content/GFX/Info.jpg" /></td>
+                    <td class="linkLinkTd"><a href="Information.aspx" class="Menu">Information</a></td>
+                </tr>
+                <tr>
+                    <td class="linkImgTd"><img src="/Content/GFX/print.jpg" /></td>
+                    <td class="linkLinkTd"><a href="#" onclick="javascript:window.print();" class="Menu">Print</a></td>
+                </tr>
+                <tr>
+                    <td class="linkImgTd"><img src="/Content/GFX/post.jpg" /></td>
+                    <td class="linkLinkTd"><a href="Kontakt.aspx" class="Menu">Kontakt</a></td>
+                </tr>
+                <tr>
+                    <td class="linkImgTd"><img src="/Content/GFX/mail.jpg" /></td>
+                    <td class="linkLinkTd"><asp:Literal ID="litEmail" runat="server" /></td>
+                </tr>
+            </table>
+
+
+        </div>
+        <div id="hMenu">
+            <div id="hMenuCon">
+                <asp:Panel ID="pnlSoeg" runat="server" DefaultButton="btnSoeg">
+                    @using (Html.BeginForm("Search", "Product", new { search = "" }, FormMethod.Get))
+                    {
+
+                        @Html.TextBox("search", null, new { placeholder = "Søg", style="width:108px;"})
+                        <br />
+                        <input type="submit" value="Søg" />
+
+                    }
+                    <a href="AdvSoeg.aspx" class="Menu">Avanceret søg</a>
+
+                </asp:Panel>
+            </div>
+            <div id="nyhed">
+
+            </div>
+        </div>
+        <div id="content">
+            @RenderBody()
+        </div>
+        <div id="clear">
+        </div>
+    </div>
+    <div id="adress">
+        @Html.Raw(@ViewBag.Adress)
+    </div>
+
+</body>
+</html>

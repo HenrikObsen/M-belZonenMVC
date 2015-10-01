@@ -1,0 +1,49 @@
+﻿@using RepoMZ
+@model RepoMZ.Produkt
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var kf = new KategoriFac();
+
+    var items = kf.GetAll().Select(kat => new SelectListItem {Text = kat.Navn, Value = kat.ID.ToString()}).ToList();
+
+    //foreach (var kat in kf.GetAll())
+    //{
+    //    items.Add(new SelectListItem { Text = kat.Navn, Value = kat.ID.ToString() });
+    //}
+
+}
+
+<h2>Opret produkt</h2>
+@using (Html.BeginForm("AddProd", "Produkt", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <table>
+        <tr>
+            <td>Kategori:</td>
+            <td>@Html.DropDownList("ddlKat", items)</td>
+        </tr>
+        <tr>
+            <td>Navn:</td>
+            <td>@Html.TextBox("txtNavn")</td>
+        </tr>
+        <tr>
+            <td>Pris:</td>
+            <td>@Html.TextBox("txtPris")</td>
+        </tr>
+        <tr>
+            <td>Billede:</td>
+            <td><input type="file" id="file" name="file" size="23" />
+</td>
+        </tr>
+        <tr>
+            <td colspan="2">@Html.TextArea("txtTekst")</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Gem" />
+            </td>
+        </tr>
+    </table>
+
+}
